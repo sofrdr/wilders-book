@@ -1,6 +1,7 @@
 const express = require("express");
 const { appDataSource } = require("./utils");
 const Wilder = require("./entity/Wilder");
+const wilderController = require("./controllers/wilder");
 
 const app = express();
 app.use(express.json());
@@ -10,12 +11,14 @@ app.get("/", async (req, res) => {
   res.send(wilders);
 });
 
-const newWilder = {
+app.post("/api/wilder", wilderController.create);
+
+/* const newWilder = {
   name: "Sophie Roudier",
   description:
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris",
   skills: ["HTML", "React", "Node"],
-};
+}; */
 
 const start = async () => {
   await appDataSource.initialize();
