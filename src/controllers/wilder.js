@@ -18,4 +18,31 @@ module.exports = {
       res.status(404).json({ error });
     }
   },
+
+  updateWilder: async (req, res) => {
+    try {
+      const wilder = await appDataSource
+        .getRepository(Wilder)
+        .findOneBy({ id: req.params.id });
+
+      const data = await appDataSource
+        .getRepository(Wilder)
+        .merge(wilder, req.body);
+
+      res.status(201).json(data);
+    } catch (error) {
+      res.status(404).json({ error });
+    }
+  },
+
+  deleteWilder: async (req, res) => {
+    try {
+      const data = await appDataSource
+        .getRepository(Wilder)
+        .delete(req.params.id);
+      res.status(200).json(data);
+    } catch (error) {
+      res.status(404).json({ error });
+    }
+  },
 };

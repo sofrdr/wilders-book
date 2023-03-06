@@ -10,6 +10,10 @@ app.get("/api/wilder", wilderController.getAllWilders);
 
 app.post("/api/wilder", wilderController.create);
 
+app.put("/api/wilder/:id", wilderController.updateWilder);
+
+app.delete("/api/wilder/:id", wilderController.deleteWilder);
+
 /* const newWilder = {
   name: "Sophie Roudier",
   description:
