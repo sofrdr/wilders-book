@@ -13,5 +13,12 @@ module.exports = new EntitySchema({
     name: {
       type: "text",
     },
+    description: {
+      type: "text",
+    },
+    skills: {
+      type: "text",
+      default: "[]",
+    },
   },
 });

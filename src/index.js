@@ -1,29 +1,24 @@
 const express = require("express");
-const typeorm = require("typeorm");
+const { appDataSource } = require("./utils");
 const Wilder = require("./entity/Wilder");
 
 const app = express();
+app.use(express.json());
 
-const AppDataSource = new typeorm.DataSource({
-  type: "sqlite",
-  database: "./wildersdb.sqlite",
-  synchronize: true,
-  entities: [require("./entity/Wilder")],
-});
-
-app.get("/", (req, res) => {
-  res.send("Hello world !");
+app.get("/", async (req, res) => {
+  const wilders = await appDataSource.getRepository(Wilder).find();
+  res.send(wilders);
 });
 
 const newWilder = {
   name: "Sophie Roudier",
+  description:
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris",
+  skills: ["HTML", "React", "Node"],
 };
 
 const start = async () => {
-  await AppDataSource.initialize();
-  AppDataSource.getRepository(Wilder).save(newWilder);
-  const data = await AppDataSource.getRepository(Wilder).find();
-  console.log(data);
+  await appDataSource.initialize();
   app.listen(3000, () => {
     console.log("Listening on 3000");
   });
