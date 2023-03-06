@@ -6,10 +6,7 @@ const wilderController = require("./controllers/wilder");
 const app = express();
 app.use(express.json());
 
-app.get("/", async (req, res) => {
-  const wilders = await appDataSource.getRepository(Wilder).find();
-  res.send(wilders);
-});
+app.get("/api/wilder", wilderController.getAllWilders);
 
 app.post("/api/wilder", wilderController.create);
 
