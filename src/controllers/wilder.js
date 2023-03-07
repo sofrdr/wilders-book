@@ -2,12 +2,15 @@ const { appDataSource } = require("../utils");
 const Wilder = require("../entity/Wilder");
 
 module.exports = {
-  create: (req, res) => {
-    appDataSource
-      .getRepository(Wilder)
-      .save(req.body)
-      .then(() => res.send("Created wilder"))
-      .catch(() => res.send("Error while creating wilder"));
+  create: async (req, res) => {
+    try {
+      const newWilder = await appDataSource
+        .getRepository(Wilder)
+        .save(req.body);
+      res.status(201).json({ newWilder, message: "New wilder created" });
+    } catch (error) {
+      res.status(400).json({ error: "Error while creating wilder" });
+    }
   },
 
   getAllWilders: async (req, res) => {
@@ -24,14 +27,14 @@ module.exports = {
       const wilder = await appDataSource
         .getRepository(Wilder)
         .findOneBy({ id: req.params.id });
-
-      const data = await appDataSource
-        .getRepository(Wilder)
-        .merge(wilder, req.body);
-
-      res.status(201).json(data);
+      if (!wilder) {
+        throw new Error("No wilder found");
+      }
+      appDataSource.getRepository(Wilder).merge(wilder, req.body);
+      const data = await appDataSource.getRepository(Wilder).save(wilder);
+      res.status(200).send(data);
     } catch (error) {
-      res.status(404).json({ error });
+      res.status(400).json({ error: error.message });
     }
   },
 

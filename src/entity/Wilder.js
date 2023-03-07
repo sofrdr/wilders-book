@@ -13,14 +13,5 @@ module.exports = new EntitySchema({
     name: {
       type: "text",
     },
-    description: {
-      type: "text",
-      nullable: true,
-    },
-    skills: {
-      type: "text",
-      default: "[]",
-      nullable: true,
-    },
   },
 });
