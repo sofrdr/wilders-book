@@ -13,6 +13,10 @@ module.exports = new EntitySchema({
     name: {
       type: "text",
     },
+    email: {
+      type: "text",
+      unique: true,
+    },
   },
   relations: {
     skills: {

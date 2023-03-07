@@ -16,6 +16,7 @@ module.exports = {
 
   getAllWilders: async (req, res) => {
     try {
+      console.log(req);
       const wilders = await appDataSource.getRepository(Wilder).find();
       res.send(wilders);
     } catch (error) {
