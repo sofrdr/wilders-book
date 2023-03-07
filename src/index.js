@@ -1,25 +1,12 @@
 const express = require("express");
 const { appDataSource } = require("./utils");
-const wilderController = require("./controllers/wilder");
-const skillController = require("./controllers/skill");
+const wilderRoutes = require("./routes/wilder-routes");
+const skillRoutes = require("./routes/skill-routes");
 
 const app = express();
 app.use(express.json());
-
-app.get("/api/wilder", wilderController.getAllWilders);
-
-app.post("/api/wilder", wilderController.create);
-
-app.put("/api/wilder/:id", wilderController.updateWilder);
-
-app.delete("/api/wilder/:id", wilderController.deleteWilder);
-
-app.get("/api/skill", skillController.getAllSkills);
-app.post("/api/skill", skillController.create);
-app.put("/api/skill/:id", skillController.updateSkill);
-app.delete("/api/skill/:id", skillController.deleteSkill);
-
-app.post("/api/wilder/skills", wilderController.addSkill);
+app.use("/api/wilder", wilderRoutes);
+app.use("/api/skill", skillRoutes);
 
 const start = async () => {
   await appDataSource.initialize();
