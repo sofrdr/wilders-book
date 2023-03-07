@@ -1,0 +1,6 @@
+PUT http://localhost:3000/api/skill/4
+Content-Type: application/json
+
+{
+    "name": "MongoDB"
+}
