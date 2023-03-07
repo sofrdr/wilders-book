@@ -19,6 +19,8 @@ app.post("/api/skill", skillController.create);
 app.put("/api/skill/:id", skillController.updateSkill);
 app.delete("/api/skill/:id", skillController.deleteSkill);
 
+app.post("/api/wilder/skills", wilderController.addSkill);
+
 const start = async () => {
   await appDataSource.initialize();
   app.listen(3000, () => {
