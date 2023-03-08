@@ -13,25 +13,23 @@ module.exports = {
         .getRepository(Wilder)
         .findOneBy({ email: email });
       if (existingUser) {
-        throw new Error(
-          "Email already exists. Please choose a different email"
-        );
+        return res.status(409).send({ error: "Email already exists" });
       }
       const newWilder = await appDataSource
         .getRepository(Wilder)
         .save(req.body);
-      res.status(201).json({ newWilder, message: "New wilder created" });
+      return res.status(201).send({ newWilder, message: "New wilder created" });
     } catch (error) {
-      res.status(400).json({ error: error.message });
+      return res.status(400).send({ error: error.message });
     }
   },
 
   getAllWilders: async (req, res) => {
     try {
       const wilders = await appDataSource.getRepository(Wilder).find();
-      res.send(wilders);
+      return res.send(wilders);
     } catch (error) {
-      res.status(404).json({ error });
+      return res.status(404).send({ error });
     }
   },
 
@@ -41,24 +39,30 @@ module.exports = {
         .getRepository(Wilder)
         .findOneBy({ id: req.params.id });
       if (!wilder) {
-        throw new Error("No wilder found");
+        return res.status(404).send({ error: "No wilder found" });
       }
       appDataSource.getRepository(Wilder).merge(wilder, req.body);
       const data = await appDataSource.getRepository(Wilder).save(wilder);
-      res.status(200).send(data);
+      return res.status(200).send(data);
     } catch (error) {
-      res.status(400).json({ error: error.message });
+      return res.status(400).send({ error: error.message });
     }
   },
 
   deleteWilder: async (req, res) => {
     try {
+      const wilder = await appDataSource
+        .getRepository(Wilder)
+        .findOneBy({ id: req.params.id });
+      if (!wilder) {
+        return res.status(404).send({ error: "No wilder found" });
+      }
       const data = await appDataSource
         .getRepository(Wilder)
         .delete(req.params.id);
-      res.status(200).json(data);
+      return res.status(200).send(data);
     } catch (error) {
-      res.status(404).json({ error });
+      return res.status(400).send({ error });
     }
   },
 
@@ -66,19 +70,25 @@ module.exports = {
     try {
       const wilderToUpdate = await appDataSource
         .getRepository(Wilder)
-        .findOneBy({ name: req.body.wilderName });
+        .findOneBy({ id: req.params.wilderId });
+      if (!wilderToUpdate) {
+        return res.status(404).send({ error: "No wilder found" });
+      }
 
       const skillToAdd = await appDataSource
         .getRepository(Skill)
-        .findOneBy({ name: req.body.skillName });
+        .findOneBy({ id: req.params.skillId });
+      if (!skillToAdd) {
+        return res.status(404).send({ error: "No skill to add" });
+      }
 
       wilderToUpdate.skills = [...wilderToUpdate.skills, skillToAdd];
       const data = await appDataSource
         .getRepository(Wilder)
         .save(wilderToUpdate);
-      res.status(201).json(data);
+      return res.status(201).send(data, { message: "Skill created" });
     } catch (error) {
-      console.log(error);
+      return res.status(400).send({ error });
     }
   },
 };

@@ -6,6 +6,6 @@ router.get("/", wilderController.getAllWilders);
 router.post("/", wilderController.create);
 router.put("/:id", wilderController.updateWilder);
 router.delete("/:id", wilderController.deleteWilder);
-router.post("/skills", wilderController.addSkill);
+router.post("/:wilderId/skill/:skillId/add", wilderController.addSkill);
 
 module.exports = router;

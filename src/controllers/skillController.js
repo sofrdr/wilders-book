@@ -5,18 +5,21 @@ module.exports = {
   create: async (req, res) => {
     try {
       const newSkill = await appDataSource.getRepository(Skill).save(req.body);
-      res.status(201).json({ newSkill, message: "New skill created" });
+      return res.status(201).send({ newSkill, message: "New skill created" });
     } catch (error) {
-      res.status(400).json({ error: "Error while creating new skill" });
+      if (error.code === "SQLITE_CONSTRAINT") {
+        return res.status(409).send({ error: "Skill already exists" });
+      }
+      return res.status(400).send({ error: "Error while creating new skill" });
     }
   },
 
   getAllSkills: async (req, res) => {
     try {
       const skills = await appDataSource.getRepository(Skill).find();
-      res.json(skills);
+      return res.send(skills);
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      return res.status(500).send({ error: error.message });
     }
   },
 
@@ -26,22 +29,30 @@ module.exports = {
         .getRepository(Skill)
         .findOneBy({ id: req.params.id });
       if (!skill) {
-        throw new Error("No skill founded");
+        return res.status(404).send({ error: "No skill found" });
       }
       appDataSource.getRepository(Skill).merge(skill, req.body);
       const skillUpdated = await appDataSource.getRepository(Skill).save(skill);
-      res.status(201).json({ skillUpdated, message: "Skill updated" });
+      return res.status(201).send({ skillUpdated, message: "Skill updated" });
     } catch (error) {
-      res.status(400).json({ error: error.message });
+      return res.status(400).send({ error: error.message });
     }
   },
 
   deleteSkill: async (req, res) => {
     try {
-      const data = appDataSource.getRepository(Skill).delete(req.params.id);
-      res.status(200).json({ data, message: "Skill deleted" });
+      const skill = await appDataSource
+        .getRepository(Skill)
+        .findOneBy({ id: req.params.id });
+      if (!skill) {
+        return res.status(404).send({ error: "No skill found" });
+      }
+      const data = await appDataSource
+        .getRepository(Skill)
+        .delete(req.params.id);
+      return res.status(200).send({ data, message: "Skill deleted" });
     } catch (error) {
-      res.status(404).json({ error: error.message });
+      return res.status(404).send({ error: error.message });
     }
   },
 };
