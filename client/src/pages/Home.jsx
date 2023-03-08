@@ -1,5 +1,6 @@
 import { React, useEffect, useState } from "react";
 import Footer from "../components/Footer/Footer";
+import Form from "../components/Form/Form";
 import Header from "../components/Header/Header";
 import Wilder from "../components/Wilder/Wilder";
 import { wildersData } from "../wildersData.js";
@@ -33,6 +34,10 @@ const Home = () => {
               const { name, skills, id } = wilder;
               return <Wilder key={id} name={name} skills={skills} />;
             })}
+        </section>
+        <section className="form-container">
+          <h2>Add a wilder</h2>
+          <Form />
         </section>
       </main>
       <Footer />

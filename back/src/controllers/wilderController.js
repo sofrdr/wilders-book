@@ -87,7 +87,7 @@ module.exports = {
       const data = await appDataSource
         .getRepository(Wilder)
         .save(wilderToUpdate);
-      return res.status(201).send(data, { message: "Skill created" });
+      return res.status(201).send({ message: "Skill created" });
     } catch (error) {
       return res.status(400).send({ error });
     }

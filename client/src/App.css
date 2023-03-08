@@ -37,6 +37,9 @@ p {
   padding: 24px;
 }
 
+.form-container {
+  margin-top: 50px;
+}
 
 .button {
   /* Reset text link default */
