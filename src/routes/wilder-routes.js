@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const wilderController = require("../controllers/wilder");
+const wilderController = require("../controllers/wilderController");
 
 router.get("/", wilderController.getAllWilders);
 router.post("/", wilderController.create);

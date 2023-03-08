@@ -5,18 +5,29 @@ const Skill = require("../entity/Skill");
 module.exports = {
   create: async (req, res) => {
     try {
+      const { email } = req.body;
+      if (!email) {
+        throw new Error("Please enter an email");
+      }
+      const existingUser = await appDataSource
+        .getRepository(Wilder)
+        .findOneBy({ email: email });
+      if (existingUser) {
+        throw new Error(
+          "Email already exists. Please choose a different email"
+        );
+      }
       const newWilder = await appDataSource
         .getRepository(Wilder)
         .save(req.body);
       res.status(201).json({ newWilder, message: "New wilder created" });
     } catch (error) {
-      res.status(400).json({ error: "Error while creating wilder" });
+      res.status(400).json({ error: error.message });
     }
   },
 
   getAllWilders: async (req, res) => {
     try {
-      console.log(req);
       const wilders = await appDataSource.getRepository(Wilder).find();
       res.send(wilders);
     } catch (error) {
