@@ -1,5 +1,6 @@
 import ProfileImg from "../../assets/blank_profile.png";
 import React from "react";
+import Skill from "../Skill";
 
 const Wilder = ({ name, skills }) => {
   return (
@@ -13,6 +14,12 @@ const Wilder = ({ name, skills }) => {
         sunt nihil possimus porro.
       </p>
       <h4>Wild Skills</h4>
+      <ul className="skills">
+        {skills.map((skill, i) => {
+          const { title, votes } = skill;
+          return <Skill key={i} title={title} votes={votes} />;
+        })}
+      </ul>
     </article>
   );
 };
