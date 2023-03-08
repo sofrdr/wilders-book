@@ -5,6 +5,7 @@ import Wilder from "../components/Wilder/Wilder";
 import { wildersData } from "../wildersData.js";
 
 const Home = () => {
+  const [wilders, setWilders] = useState([]);
   return (
     <div>
       <Header />

@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const { appDataSource } = require("./utils");
 const wilderRoutes = require("./routes/wilder-routes");
 const skillRoutes = require("./routes/skill-routes");
@@ -10,9 +11,10 @@ app.use("/api/skill", skillRoutes);
 
 const start = async () => {
   await appDataSource.initialize();
-  app.listen(3000, () => {
-    console.log("Listening on 3000");
+  app.listen(5000, () => {
+    console.log("Listening on 5000");
   });
 };
 
+app.use(cors());
 start();
