@@ -1,12 +1,7 @@
 import React from "react";
 
-const Skill = ({ title, votes }) => {
-  return (
-    <li>
-      {title}
-      <span className="votes">{votes}</span>
-    </li>
-  );
+const Skill = ({ name }) => {
+  return <li>{name}</li>;
 };
 
 export default Skill;
