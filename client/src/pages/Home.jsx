@@ -1,4 +1,5 @@
 import React from "react";
+import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
 import Wilder from "../components/Wilder/Wilder";
 import { wildersData } from "../wildersData.js";
@@ -16,6 +17,7 @@ const Home = () => {
           })}
         </section>
       </main>
+      <Footer />
     </div>
   );
 };
