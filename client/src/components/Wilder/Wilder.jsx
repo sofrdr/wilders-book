@@ -1,6 +1,7 @@
 import ProfileImg from "../../assets/blank_profile.png";
 import React from "react";
 import Skill from "../Skill";
+import "./Wilder.css";
 
 const Wilder = ({ name, skills }) => {
   return (
