@@ -2,5 +2,9 @@ POST http://localhost:3000/api/skill
 Content-Type: application/json
 
 {
-    "name": "Mongodb"
+    "name": "SQLite"
 }
+
+###
+
+POST http://localhost:3000/api/skill/grade

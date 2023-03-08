@@ -1,6 +1,7 @@
 const { appDataSource } = require("../utils");
 const Wilder = require("../entity/Wilder");
 const Skill = require("../entity/Skill");
+const Grade = require("../entity/Grade");
 
 module.exports = {
   create: async (req, res) => {
