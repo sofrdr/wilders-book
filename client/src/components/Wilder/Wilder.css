@@ -8,6 +8,7 @@
     border: 1px solid #c9c9c9;
     border-radius: 7px;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+    position: relative;
 }
 
 .card>img:first-child {
@@ -35,4 +36,11 @@
 .card ul {
     color: #757575;
     line-height: 1.5;
+}
+
+.card .delete-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+
 }

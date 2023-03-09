@@ -38,7 +38,7 @@ const Wilder = ({ name, skills, id, city, email }) => {
       </ul>
       <h4>Contact</h4>
       <p>{email}</p>
-      <button onClick={() => removeWilder(id)}>
+      <button onClick={() => removeWilder(id)} className="delete-button">
         <ImBin2 />
       </button>
     </article>
