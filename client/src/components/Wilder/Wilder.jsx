@@ -4,7 +4,20 @@ import Skill from "../Skill";
 import "./Wilder.css";
 import { ImBin2 } from "react-icons/im";
 
-const Wilder = ({ name, skills }) => {
+const Wilder = ({ name, skills, id }) => {
+  const url = "http://localhost:3001/api/wilder";
+
+  const removeWilder = async (id) => {
+    try {
+      const response = await fetch(`${url}/${id}`, {
+        method: "DELETE",
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <article className="card">
       <img src={ProfileImg} alt={`${name} Profile`} />
@@ -22,7 +35,7 @@ const Wilder = ({ name, skills }) => {
           return <Skill key={i} name={name} v />;
         })}
       </ul>
-      <button>
+      <button onClick={() => removeWilder(id)}>
         <ImBin2 />
       </button>
     </article>
