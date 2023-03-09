@@ -1,0 +1,14 @@
+.add-skill-form {
+    position: relative;
+}
+
+.add-skill-form label {
+    display: none;
+}
+
+.add-skill-form .close-button {
+    position: absolute;
+    top: -13px;
+    right: -5px;
+    cursor: pointer;
+}

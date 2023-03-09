@@ -1,12 +1,14 @@
 import ProfileImg from "../../assets/blank_profile.png";
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Skill from "../Skill/Skill";
 import "./Wilder.css";
 import { ImBin2 } from "react-icons/im";
+import AddSkillForm from "../AddSkillForm/AddSkillForm";
 
 const Wilder = ({ name, skills, id, city, email }) => {
   const url = "http://localhost:3001/api/wilder";
+  const [addSkill, setAddSkill] = useState(false);
 
   const removeWilder = async (id) => {
     try {
@@ -36,6 +38,17 @@ const Wilder = ({ name, skills, id, city, email }) => {
           return <Skill key={i} name={name} v />;
         })}
       </ul>
+      {addSkill ? (
+        <AddSkillForm wilderId={id} />
+      ) : (
+        <button
+          className="add-skill-button button"
+          onClick={() => setAddSkill(true)}
+        >
+          Add a skill
+        </button>
+      )}
+
       <h4>Contact</h4>
       <p>{email}</p>
       <button onClick={() => removeWilder(id)} className="delete-button">
