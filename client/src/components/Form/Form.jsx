@@ -74,7 +74,9 @@ const Form = () => {
         </div>
         {errorMsg && <div className="error-msg">{errorMsg}</div>}
         <br />
-        <button type="submit">Submit</button>
+        <button type="submit" className="button">
+          Submit
+        </button>
       </form>
     </section>
   );

@@ -45,7 +45,7 @@ const Wilder = ({ name, skills, id, city, email }) => {
       {addSkillFormOpen ? (
         <AddSkillForm wilderId={id} toggleForm={toggleForm} />
       ) : (
-        <button className="add-skill-button button" onClick={toggleForm}>
+        <button className="button" onClick={toggleForm}>
           Add a skill
         </button>
       )}

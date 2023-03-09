@@ -42,12 +42,19 @@ p {
 .button {
   /* Reset text link default */
   text-decoration: none;
-
+  border: none;
   background-color: #F76C6C;
   color: #fff;
-  padding: 0.5em 1em;
+
   cursor: pointer;
   margin: 10px 0;
   border-radius: 4px;
   display: inline-block;
+
+
+
+  padding: 7px 20px;
+  font-size: 14px;
+  font-weight: 400;
+
 }
