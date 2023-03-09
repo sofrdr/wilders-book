@@ -31,32 +31,35 @@ const Form = () => {
     addWilder({ name, email });
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="input-container">
-        <div className="form-input">
-          <label htmlFor="name">Name :</label>
-          <input
-            id="name"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
+    <section className="form-container">
+      <h2>Add a wilder</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="input-container">
+          <div className="form-input">
+            <label htmlFor="name">Name :</label>
+            <input
+              id="name"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+
+          <div className="form-input">
+            <label htmlFor="email">Email :</label>
+            <input
+              id="email"
+              type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
         </div>
 
-        <div className="form-input">
-          <label htmlFor="email">Email :</label>
-          <input
-            id="email"
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-      </div>
-
-      <button type="submit">Submit</button>
-      {errorMsg && <div>{errorMsg}</div>}
-    </form>
+        <button type="submit">Submit</button>
+        {errorMsg && <div>{errorMsg}</div>}
+      </form>
+    </section>
   );
 };
 

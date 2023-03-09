@@ -1,9 +1,6 @@
 import { React, useEffect, useState } from "react";
-import Footer from "../components/Footer/Footer";
 import Form from "../components/Form/Form";
-import Header from "../components/Header/Header";
-import Wilder from "../components/Wilder/Wilder";
-import { wildersData } from "../wildersData.js";
+import WildersList from "../components/WildersList/WildersList";
 
 const Home = () => {
   const [wilders, setWilders] = useState([]);
@@ -22,26 +19,13 @@ const Home = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [wilders]);
+
   return (
-    <div>
-      <Header />
-      <main className="container">
-        <h2>Wilders</h2>
-        <section className="card-row">
-          {wilders &&
-            wilders.map((wilder, i) => {
-              const { name, skills, id } = wilder;
-              return <Wilder key={id} name={name} skills={skills} />;
-            })}
-        </section>
-        <section className="form-container">
-          <h2>Add a wilder</h2>
-          <Form />
-        </section>
-      </main>
-      <Footer />
-    </div>
+    <main className="container">
+      <WildersList wilders={wilders} />
+      <Form />
+    </main>
   );
 };
 

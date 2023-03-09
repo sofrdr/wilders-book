@@ -2,6 +2,7 @@ import ProfileImg from "../../assets/blank_profile.png";
 import React from "react";
 import Skill from "../Skill";
 import "./Wilder.css";
+import { ImBin2 } from "react-icons/im";
 
 const Wilder = ({ name, skills }) => {
   return (
@@ -21,6 +22,9 @@ const Wilder = ({ name, skills }) => {
           return <Skill key={i} name={name} v />;
         })}
       </ul>
+      <button>
+        <ImBin2 />
+      </button>
     </article>
   );
 };

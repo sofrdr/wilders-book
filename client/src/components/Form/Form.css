@@ -1,3 +1,7 @@
+.form-container {
+    margin-top: 50px;
+}
+
 form {
     margin: 30px 0;
 
@@ -21,7 +25,7 @@ input {
     outline: none;
 }
 
-button {
+form button {
     background-color: #F76C6C;
     border-radius: 15px;
     cursor: pointer;
