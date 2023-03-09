@@ -1,7 +1,7 @@
 import ProfileImg from "../../assets/blank_profile.png";
 import React from "react";
 import PropTypes from "prop-types";
-import Skill from "../Skill";
+import Skill from "../Skill/Skill";
 import "./Wilder.css";
 import { ImBin2 } from "react-icons/im";
 
