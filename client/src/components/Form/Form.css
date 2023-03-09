@@ -9,11 +9,13 @@ form {
 
 .input-container {
     display: flex;
-    margin-bottom: 20px;
+    flex-direction: column;
+
+
 }
 
 .form-input {
-    margin-right: 50px;
+    margin-bottom: 15px;
 }
 
 label {
@@ -28,7 +30,7 @@ input {
 form button {
     background-color: #F76C6C;
     border-radius: 15px;
-    cursor: pointer;
+
     border: none;
     padding: 7px 20px;
     font-size: 16px;

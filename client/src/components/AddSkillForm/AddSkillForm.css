@@ -6,9 +6,18 @@
     display: none;
 }
 
+.add-skill-form button {
+    margin: 10px 0;
+}
+
 .add-skill-form .close-button {
     position: absolute;
-    top: -13px;
-    right: -5px;
+
+    right: -17px;
     cursor: pointer;
+}
+
+.add-skill-form .close-button svg {
+    width: 20px;
+    height: 20px;
 }

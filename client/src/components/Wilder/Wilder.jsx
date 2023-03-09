@@ -8,7 +8,11 @@ import AddSkillForm from "../AddSkillForm/AddSkillForm";
 
 const Wilder = ({ name, skills, id, city, email }) => {
   const url = "http://localhost:3001/api/wilder";
-  const [addSkill, setAddSkill] = useState(false);
+  const [addSkillFormOpen, setAddSkillFormOpen] = useState(false);
+
+  const toggleForm = () => {
+    setAddSkillFormOpen(!addSkillFormOpen);
+  };
 
   const removeWilder = async (id) => {
     try {
@@ -38,13 +42,10 @@ const Wilder = ({ name, skills, id, city, email }) => {
           return <Skill key={i} name={name} v />;
         })}
       </ul>
-      {addSkill ? (
-        <AddSkillForm wilderId={id} />
+      {addSkillFormOpen ? (
+        <AddSkillForm wilderId={id} toggleForm={toggleForm} />
       ) : (
-        <button
-          className="add-skill-button button"
-          onClick={() => setAddSkill(true)}
-        >
+        <button className="add-skill-button button" onClick={toggleForm}>
           Add a skill
         </button>
       )}
