@@ -6,6 +6,12 @@ const Form = () => {
   const [errorMsg, setErrorMsg] = useState("");
 
   const url = "http://localhost:3001/api/wilder";
+
+  const reinitializeData = () => {
+    setEmail("");
+    setName("");
+  };
+
   const addWilder = async ({ name, email }) => {
     try {
       setErrorMsg("");
@@ -17,10 +23,10 @@ const Form = () => {
         body: JSON.stringify({ name, email }),
       });
       const data = await response.json();
-      console.log(data);
       if (data.error) {
         setErrorMsg(data.error);
       }
+      reinitializeData();
     } catch (error) {
       console.log(error);
     }
@@ -55,9 +61,9 @@ const Form = () => {
             />
           </div>
         </div>
-
+        {errorMsg && <div className="error-msg">{errorMsg}</div>}
+        <br />
         <button type="submit">Submit</button>
-        {errorMsg && <div>{errorMsg}</div>}
       </form>
     </section>
   );
