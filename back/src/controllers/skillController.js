@@ -1,16 +1,23 @@
 const { appDataSource } = require("../utils");
+const validator = require("validator");
 const Skill = require("../entity/Skill");
 
 module.exports = {
   create: async (req, res) => {
     try {
+      const { name } = req.body;
+      if (validator.isEmpty(name, { ignore_whitespace: true }) === true) {
+        throw new Error("Field empty");
+      }
       const newSkill = await appDataSource.getRepository(Skill).save(req.body);
       return res.status(201).send({ newSkill, message: "New skill created" });
     } catch (error) {
       if (error.code === "SQLITE_CONSTRAINT") {
         return res.status(409).send({ error: "Skill already exists" });
       }
-      return res.status(400).send({ error: "Error while creating new skill" });
+      return res
+        .status(400)
+        .send({ error: error.message || "Error while creating new skill" });
     }
   },
 

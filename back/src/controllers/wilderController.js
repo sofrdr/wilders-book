@@ -1,20 +1,24 @@
 const { appDataSource } = require("../utils");
 const Wilder = require("../entity/Wilder");
 const Skill = require("../entity/Skill");
-const Grade = require("../entity/Grade");
+const validator = require("validator");
 
 module.exports = {
   create: async (req, res) => {
     try {
-      const { email } = req.body;
-      if (!email) {
-        throw new Error("Please enter an email");
+      const { email, name, city } = req.body;
+      if (!email || validator.isEmail(email) === false) {
+        throw new Error("Please enter a correct email");
       }
       const existingUser = await appDataSource
         .getRepository(Wilder)
         .findOneBy({ email: email });
       if (existingUser) {
         return res.status(409).send({ error: "Email already exists" });
+      }
+
+      if (!name || !city) {
+        throw new Error("One of the fields is empty");
       }
       const newWilder = await appDataSource
         .getRepository(Wilder)
