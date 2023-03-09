@@ -3,6 +3,7 @@ import "./Form.css";
 const Form = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [city, setCity] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
 
   const url = "http://localhost:3001/api/wilder";
@@ -58,6 +59,16 @@ const Form = () => {
               type="text"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+
+          <div className="form-input">
+            <label htmlFor="city">City :</label>
+            <input
+              id="city"
+              type="text"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
             />
           </div>
         </div>

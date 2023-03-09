@@ -17,6 +17,11 @@ module.exports = new EntitySchema({
       type: "text",
       unique: true,
     },
+    city: {
+      type: "varchar",
+      length: 150,
+      nullable: true,
+    },
   },
   relations: {
     skills: {

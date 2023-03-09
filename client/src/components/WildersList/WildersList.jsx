@@ -8,9 +8,9 @@ const WildersList = ({ wilders }) => {
       <h2>Wilders</h2>
       <div className="card-row">
         {wilders &&
-          wilders.map((wilder, i) => {
-            const { name, skills, id } = wilder;
-            return <Wilder key={id} id={id} name={name} skills={skills} />;
+          wilders.map((wilder) => {
+            const { id } = wilder;
+            return <Wilder key={id} {...wilder} />;
           })}
       </div>
     </section>

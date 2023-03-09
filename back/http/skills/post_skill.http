@@ -1,8 +1,8 @@
-POST http://localhost:3000/api/skill
+POST http://localhost:3001/api/skill
 Content-Type: application/json
 
 {
-    "name": "SQLite"
+    "name": "Ruby"
 }
 
 ###

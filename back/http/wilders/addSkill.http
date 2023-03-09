@@ -1,1 +1,1 @@
-POST http://localhost:3001/api/wilder/2/skill/2/add
+POST http://localhost:3001/api/wilder/15/skill/11/add
