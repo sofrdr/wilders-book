@@ -63,6 +63,8 @@ Wilder.propTypes = {
   name: PropTypes.string,
   skills: PropTypes.array,
   id: PropTypes.number,
+  email: PropTypes.string,
+  city: PropTypes.string,
 };
 
 export default Wilder;

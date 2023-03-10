@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AppContext } from "../../utils/context";
 import Wilder from "../Wilder/Wilder";
 import "./WildersList.css";
 
-const WildersList = ({ wilders }) => {
+const WildersList = () => {
+  const { wilders } = useContext(AppContext);
   return (
     <section>
       <h2>Wilders</h2>
