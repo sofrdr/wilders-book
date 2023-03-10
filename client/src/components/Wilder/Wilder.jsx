@@ -38,8 +38,8 @@ const Wilder = ({ name, skills, id, city, email }) => {
       </p>
       <h4>Wild Skills</h4>
       <ul className="skills">
-        {skills.map(({ name }, i) => {
-          return <Skill key={i} name={name} v />;
+        {skills.map((skill, i) => {
+          return <Skill key={i} name={skill.name} skillId={skill.id} id={id} />;
         })}
       </ul>
       {addSkillFormOpen ? (

@@ -8,5 +8,6 @@ router.post("/", wilderController.create);
 router.put("/:id", wilderController.updateWilder);
 router.delete("/:id", wilderController.deleteWilder);
 router.post("/:wilderId/skill/:skillId/add", wilderController.addSkill);
+router.delete("/:wilderId/skill/:skillId/delete", wilderController.removeSkill);
 
 module.exports = router;

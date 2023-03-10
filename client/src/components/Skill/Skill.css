@@ -31,3 +31,8 @@
     height: 20px;
     width: 20px;
 }
+
+.skills .delete-btn {
+    margin: 0 3px;
+    cursor: pointer;
+}

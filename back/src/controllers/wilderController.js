@@ -96,4 +96,32 @@ module.exports = {
       return res.status(400).send({ error });
     }
   },
+
+  removeSkill: async (req, res) => {
+    try {
+      const wilderToUpdate = await appDataSource
+        .getRepository(Wilder)
+        .findOneBy({ id: req.params.wilderId });
+      if (!wilderToUpdate) {
+        return res.status(404).send({ error: "No wilder found" });
+      }
+
+      const skillToRemove = await appDataSource
+        .getRepository(Skill)
+        .findOneBy({ id: req.params.skillId });
+      if (!skillToRemove) {
+        return res.status(404).send({ error: "No skill to remove" });
+      }
+      console.log(wilderToUpdate.skills);
+      const newSkills = wilderToUpdate.skills.filter(
+        (item) => item.id !== skillToRemove.id
+      );
+      wilderToUpdate.skills = newSkills;
+
+      await appDataSource.getRepository(Wilder).save(wilderToUpdate);
+      return res.status(200).send({ message: "Skill deleted" });
+    } catch (error) {
+      return res.status(400).send({ error });
+    }
+  },
 };
