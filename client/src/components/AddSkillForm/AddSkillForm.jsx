@@ -1,26 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
+import { AppContext } from "../../utils/context";
 import "./AddSkillForm.css";
 
 const AddSkillForm = ({ wilderId, toggleForm }) => {
-  const [skillsList, setSkillsList] = useState([]);
   const [skill, setSkill] = useState("");
 
-  const url = "http://localhost:3001/api/skill";
+  const { skillsList, setIsLoading } = useContext(AppContext);
 
-  // Fetch all skills from BDD
-  useEffect(() => {
-    const getAllSkills = async () => {
-      try {
-        const response = await fetch(url);
-        const data = await response.json();
-        setSkillsList(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getAllSkills();
-  }, [skillsList]);
+  const url = "http://localhost:3001/api/skill";
 
   // Function to create a new skill
   const createSkill = async (skill) => {
@@ -68,6 +56,7 @@ const AddSkillForm = ({ wilderId, toggleForm }) => {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
+      setIsLoading(true);
       // Check if the skill already exists, if not we create it before adding it to the wilder
       if (!skillsName.includes(skill)) {
         const newSkillId = await createSkill(skill);
@@ -81,6 +70,7 @@ const AddSkillForm = ({ wilderId, toggleForm }) => {
     } catch (error) {
       console.log(error);
     }
+    setIsLoading(false);
   };
 
   return (

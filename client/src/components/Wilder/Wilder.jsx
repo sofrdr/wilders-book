@@ -1,13 +1,17 @@
 import ProfileImg from "../../assets/blank_profile.png";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import PropTypes from "prop-types";
 import Skill from "../Skill/Skill";
 import "./Wilder.css";
 import { ImBin2 } from "react-icons/im";
 import AddSkillForm from "../AddSkillForm/AddSkillForm";
+import { AppContext } from "../../utils/context";
 
 const Wilder = ({ name, skills, id, city, email }) => {
   const url = "http://localhost:3001/api/wilder";
+
+  const { setIsLoading } = useContext(AppContext);
+
   const [addSkillFormOpen, setAddSkillFormOpen] = useState(false);
 
   const toggleForm = () => {
@@ -16,11 +20,13 @@ const Wilder = ({ name, skills, id, city, email }) => {
 
   const removeWilder = async (id) => {
     try {
+      setIsLoading(true);
       const response = await fetch(`${url}/${id}`, {
         method: "DELETE",
       });
       const data = await response.json();
       console.log(data);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }

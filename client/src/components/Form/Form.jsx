@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { AppContext } from "../../utils/context";
+
 import "./Form.css";
 const Form = () => {
   const [name, setName] = useState("");
@@ -8,20 +10,23 @@ const Form = () => {
 
   const url = "http://localhost:3001/api/wilder";
 
+  const { setIsLoading } = useContext(AppContext);
+
   const reinitializeData = () => {
     setEmail("");
     setName("");
   };
 
-  const addWilder = async ({ name, email }) => {
+  const addWilder = async ({ name, email, city }) => {
     try {
+      setIsLoading(true);
       setErrorMsg("");
       const response = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, email }),
+        body: JSON.stringify({ name, email, city }),
       });
       const data = await response.json();
       if (data.error) {
@@ -31,11 +36,12 @@ const Form = () => {
     } catch (error) {
       console.log(error);
     }
+    setIsLoading(false);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addWilder({ name, email });
+    addWilder({ name, email, city });
   };
   return (
     <section className="form-container">
